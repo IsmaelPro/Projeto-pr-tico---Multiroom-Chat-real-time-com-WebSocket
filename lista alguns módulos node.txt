@@ -1,0 +1,5 @@
+express - framework para desenvolvimento de aplicações web
+ejs - engine de views
+consign - autoloader
+body-parser - middleware que popula a variável body que contém os elementos de formulário transitado nas resquisições
+express-validator - módulo que valida as informações digitadas em formulários
