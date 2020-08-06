@@ -22,12 +22,22 @@ io.on('connection', function(socket){
     });
 
     socket.on('msgParaServidor', function(data){
+
+        /*dialogo */
         socket.emit('msgParaCliente', 
         {apelido: data.apelido, mensagem: data.mensagem});
 
         socket.broadcast.emit('msgParaCliente', 
         {apelido: data.apelido, mensagem: data.mensagem});
 
+        /*participantes */
+        if(parseInt(data.apelido_atualizado) == 0){
+            socket.emit('participantesParaCliente', 
+            {apelido: data.apelido});
 
+            socket.broadcast.emit('participantesParaCliente', 
+            {apelido: data.apelido}
+            );
+        }
     });
 });
