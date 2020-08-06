@@ -79,21 +79,7 @@
 			
 			<div class="row participantes" id="participantes" style="display:none">
 				<div class="col-md-1"></div>
-				<div class="col-md-10">
-					<span class="participante">
-						<img src="images/ico_usuario.png" />
-						Teste
-					</span>
-					
-					<span class="participante">
-						<img src="images/ico_usuario.png" />
-						José
-					</span>
-					
-					<span class="participante">
-						<img src="images/ico_usuario.png" />
-						Fernando
-					</span>
+				<div class="col-md-10" id="pessoas">
 				</div>
 				<div class="col-md-1"></div>
                 
@@ -103,16 +89,15 @@
 		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			<div class="container">
 				<div class="panel-body campo-mensagem">
-					<form>
-						<div class="col-md-12">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Mensagem">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">></button>
-								</span>
-							</div>
+					<div class="col-md-12">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Mensagem" id="mensagem">
+							<input type="hidden" value="<%=dadosForm.apelido%>" id="apelido">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" id="enviar_mensagem">></button>
+							</span>
 						</div>
-					</form>
+					</div>					
 				</div>
 			</div>
 		</nav>		
@@ -121,6 +106,11 @@
 		<script src="/socket.io/socket.io.js"></script>
 		<script>
 			const socket = io('http://localhost');
+
+			$('#enviar_mensagem').click(function(){
+				socket.emit('msgParaServidor',
+							{apelido: $('#apelido').val(), mensagem: $('#mensagem').val()});
+			});
 
 			socket.on('msgParaCliente', function(data){
 				let html = ' ';
